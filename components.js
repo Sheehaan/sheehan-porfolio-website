@@ -1,0 +1,128 @@
+// ==========================================
+// COMPONENTS - Header, Footer, Social Icons
+// ==========================================
+
+import { CONFIG } from './config.js';
+
+// Social icons SVG paths
+const socialIcons = {
+  email: '<svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>',
+  linkedin: '<svg viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>',
+  facebook: '<svg viewBox="0 0 24 24"><path d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.15 5.96C15.21 5.96 16.12 6.04 16.12 6.04V8.51H15.01C13.77 8.51 13.38 9.28 13.38 10.07V12.06H16.16L15.72 14.96H13.38V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04Z"/></svg>',
+  instagram: '<svg viewBox="0 0 24 24"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>',
+  behance: '<svg viewBox="0 0 24 24"><path d="M22 7h-7V5h7v2zm1.726 10c-.442 1.297-2.029 3-5.101 3-3.074 0-5.564-1.729-5.564-5.675 0-3.91 2.325-5.92 5.466-5.92 3.082 0 4.964 1.782 5.375 4.426.078.506.109 1.188.095 2.14H15.97c.13 1.211.994 1.997 2.396 1.997.834 0 1.504-.325 1.873-.837h1.511zM7.654 14.006c0 1.21-.968 2.136-2.342 2.136H2.675V11.98h2.582c1.335 0 2.397.906 2.397 2.026zm1.177-5.012c0 1.21-.968 2.136-2.342 2.136H2.675V6.968h3.814c1.335 0 2.342.906 2.342 2.026zM22 17h-4.083c-.136-.752-.726-1.282-1.574-1.282-.973 0-1.764.68-1.764 1.764 0 1.084.791 1.764 1.764 1.764.848 0 1.438-.53 1.574-1.282H22c-.167 2.053-1.883 3.518-4.177 3.518-2.457 0-4.34-1.656-4.34-4.282 0-2.626 1.904-4.282 4.34-4.282 2.435 0 4.151 1.656 4.177 4.082z"/></svg>',
+  pinterest: '<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.21 2.59 7.82 6.27 9.31-.09-.8-.16-2.02.02-2.89l1.15-4.89s-.29-.58-.29-1.44c0-1.35.78-2.36 1.76-2.36.83 0 1.23.62 1.23 1.37 0 .83-.53 2.08-.81 3.24-.23.97.49 1.76 1.45 1.76 1.74 0 3.08-1.83 3.08-4.48 0-2.34-1.68-3.98-4.08-3.98-2.79 0-4.43 2.09-4.43 4.25 0 .84.32 1.74.73 2.23.08.1.09.18.06.28l-.27 1.12c-.04.18-.15.22-.34.13-1.27-.59-2.06-2.45-2.06-3.94 0-3.21 2.33-6.16 6.71-6.16 3.52 0 6.26 2.51 6.26 5.86 0 3.5-2.21 6.31-5.27 6.31-1.03 0-2-.54-2.34-1.17l-.64 2.43c-.23.88-.86 1.98-1.28 2.66.96.29 1.98.44 3.04.44 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg>',
+  github: '<svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg>'
+};
+
+// Create Header
+export function createHeader(currentPage = 'home') {
+  const navItems = [
+    { name: 'Home', href: 'index.html', page: 'home' },
+    { name: 'About', href: 'about.html', page: 'about' },
+    { name: 'Works', href: 'works.html', page: 'works' },
+    { name: 'Contact', href: 'contact.html', page: 'contact' }
+  ];
+
+  const navLinks = navItems.map(item => 
+    `<a href="${item.href}" class="nav-link ${item.page === currentPage ? 'active' : ''}" data-page="${item.page}">${item.name}</a>`
+  ).join('');
+
+  return `
+    <header class="header">
+      <div class="container header-inner">
+        <a href="index.html" class="logo">${CONFIG.site.name}</a>
+        <nav class="nav" aria-label="Main navigation">
+          <ul class="nav-list">
+            ${navItems.map(item => `<li><a href="${item.href}" class="nav-link ${item.page === currentPage ? 'active' : ''}" data-page="${item.page}">${item.name}</a></li>`).join('')}
+          </ul>
+        </nav>
+        <button class="menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+  `;
+}
+
+// Create Footer
+export function createFooter() {
+  const socialLinks = Object.entries(CONFIG.social).map(([key, url]) => 
+    `<a href="${url}" class="footer-social-link" aria-label="${key}" target="_blank" rel="noopener noreferrer">
+      ${socialIcons[key]}
+    </a>`
+  ).join('');
+
+  return `
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <span class="footer-name">${CONFIG.site.name}</span>
+          <span class="footer-tagline">${CONFIG.site.tagline}</span>
+        </div>
+        <nav class="footer-nav" aria-label="Footer navigation">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="about.html" class="footer-link">About</a>
+          <a href="works.html" class="footer-link">Works</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </nav>
+        <div class="footer-social">
+          ${socialLinks}
+        </div>
+        <p class="footer-copyright">© 2026 ${CONFIG.site.name}. All rights reserved.</p>
+      </div>
+    </footer>
+  `;
+}
+
+// Create Social Icons
+export function createSocialIcons(size = 'default') {
+  const socialLinks = Object.entries(CONFIG.social).map(([key, url]) => 
+    `<a href="${url}" class="social-link social-link--${size}" aria-label="${key}" target="_blank" rel="noopener noreferrer">
+      ${socialIcons[key]}
+    </a>`
+  ).join('');
+
+  return `<div class="social-icons">${socialLinks}</div>`;
+}
+
+// Initialize components on page load
+export function initComponents(currentPage = 'home') {
+  const header = document.querySelector('[data-header]');
+  const footer = document.querySelector('[data-footer]');
+
+  if (header) {
+    header.innerHTML = createHeader(currentPage);
+    initMobileMenu();
+  }
+
+  if (footer) {
+    footer.innerHTML = createFooter();
+  }
+}
+
+// Mobile menu functionality
+function initMobileMenu() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const nav = document.querySelector('.nav');
+
+  if (menuToggle && nav) {
+    menuToggle.addEventListener('click', () => {
+      const isActive = menuToggle.classList.contains('active');
+      menuToggle.classList.toggle('active');
+      nav.classList.toggle('active');
+      menuToggle.setAttribute('aria-expanded', !isActive);
+    });
+
+    // Close menu when clicking a link
+    nav.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        menuToggle.classList.remove('active');
+        nav.classList.remove('active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+}
