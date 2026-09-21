@@ -12,9 +12,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   
   <!-- Styles -->
-  <link rel="stylesheet" href="css/base.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/pages.css">
+  <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="components.css">
+  <link rel="stylesheet" href="pages.css">
 </head>
 <body>
   <!-- ========== HEADER ========== -->
@@ -107,11 +107,11 @@
   <!-- ========== END FOOTER ========== -->
 
   <!-- ========== SCRIPTS ========== -->
-  <script type="module" src="js/config.js"></script>
-  <script type="module" src="js/projects.js"></script>
-  <script type="module" src="js/modal.js"></script>
+  <script type="module" src="config.js"></script>
+  <script type="module" src="projects.js"></script>
+  <script type="module" src="modal.js"></script>
   <script type="module">
-    import { getAllProjects } from './js/projects.js';
+    import { getAllProjects } from './projects.js';
 
     const projects = getAllProjects();
     const grid = document.getElementById('projects-grid');
@@ -131,6 +131,6 @@
       `).join('');
     }
   </script>
-  <script type="module" src="js/main.js"></script>
+  <script type="module" src="main.js"></script>
 </body>
 </html>
